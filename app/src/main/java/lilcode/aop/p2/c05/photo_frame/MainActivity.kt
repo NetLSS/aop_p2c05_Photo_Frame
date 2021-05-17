@@ -9,11 +9,11 @@ import androidx.core.content.ContextCompat
 
 class MainActivity : AppCompatActivity() {
 
-    private val addPhotoButton: Button by lazy{
+    private val addPhotoButton: Button by lazy {
         findViewById<Button>(R.id.addPhotoButton)
     }
 
-    private val startPhotoFrameModeButton: Button by lazy{
+    private val startPhotoFrameModeButton: Button by lazy {
         findViewById(R.id.startPhotoFrameModeButton)
     }
 
@@ -35,20 +35,23 @@ class MainActivity : AppCompatActivity() {
                 ContextCompat.checkSelfPermission(
                     this,
                     android.Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED ->{
+                ) == PackageManager.PERMISSION_GRANTED -> {
                     //todo 권한이 잘 부여되었을 때 갤러리에서 사진을 선택하는 기능
 
                 }
 
                 // 권한 수락이 거절 되었다면 교육용 팝업을 띄움
-                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) ->{
+                shouldShowRequestPermissionRationale(android.Manifest.permission.READ_EXTERNAL_STORAGE) -> {
                     // 교육용 팝업 확인 후 권한 팝업을 띄우는 기능
                     showPermissionContextPopup()
                 }
 
                 else -> {
                     // 권한을 요청하는 팝업
-                    requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
+                    requestPermissions(
+                        arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE),
+                        1000
+                    )
                 }
             }
         }
@@ -58,11 +61,11 @@ class MainActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
             .setMessage("전자액자 앱에서 사진을 불러오기 위해 권한이 필요합니다.")
-            .setPositiveButton("동의하기"){_, _ ->
+            .setPositiveButton("동의하기") { _, _ ->
                 // 권한을 요청하는 팝업
                 requestPermissions(arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE), 1000)
             }
-            .setNegativeButton("취소하기"){_, _ -> }
+            .setNegativeButton("취소하기") { _, _ -> }
             .create()
             .show()
     }
