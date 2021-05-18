@@ -2,8 +2,10 @@ package lilcode.aop.p2.c05.photo_frame
 
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import java.util.*
 import kotlin.concurrent.timer
 
 class PhotoFrameActivity : AppCompatActivity() {
@@ -20,13 +22,19 @@ class PhotoFrameActivity : AppCompatActivity() {
 
     private var currentPosition = 0
 
+    private var timer: Timer? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        Log.d("PhotoFrame", "onCreate!!")
+
+
         setContentView(R.layout.activity_photoframe)
 
         getPhotoUriFromIntent()
 
-        startTimer()
+
     }
 
     private fun getPhotoUriFromIntent() {
@@ -41,9 +49,14 @@ class PhotoFrameActivity : AppCompatActivity() {
 
     private fun startTimer() {
         // 5초에 한 번씩 전환
-        timer(period = 5 * 1000) {
+        // 앱을 종료하고 난 뒤에도 timer가 실행되면 문제가 될 수 있음
+        // onStop 시 종료 후 onStart 시 다시 키는 등 처리 필요
+        timer = timer(period = 5 * 1000) {
             // timer는 메인 스레드가 아님
             runOnUiThread { // 메인 스레드
+                Log.d("PhotoFrame", "startTimer 5초 지남")
+
+
                 val current = currentPosition
                 val next = if (photoList.size <= currentPosition + 1) 0 else currentPosition + 1
 
@@ -62,8 +75,28 @@ class PhotoFrameActivity : AppCompatActivity() {
 
                 currentPosition = next
             }
-
-
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+
+        Log.d("PhotoFrame", "onStop!! timer cancel")
+
+        timer?.cancel()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("PhotoFrame", "onStart!! timer start")
+
+        startTimer()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("PhotoFrame", "onDestroy!! timer cancel")
+
+        timer?.cancel()
     }
 }
