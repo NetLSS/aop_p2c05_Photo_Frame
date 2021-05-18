@@ -17,12 +17,11 @@
 # 결과화면
 
 
+ ![1](./screenshot/1.jpg) | ![2](./screenshot/2.jpg) 
+ ---------|----------
+ ![3](./screenshot/3.jpg) 
 
-![1](./screenshot/1.png)
 
-![2](./screenshot/2.png)
-
-![3](./screenshot/3.png)
 
 # 이 챕터를 통해 배우는 것
 

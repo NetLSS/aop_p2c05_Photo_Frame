@@ -132,6 +132,7 @@ class MainActivity : AppCompatActivity() {
         val intent = Intent(Intent.ACTION_GET_CONTENT)
         intent.type = "image/*" // 모든 이미지 타입들만 설정 (필터링)
         startActivityForResult(intent, 2000) // 선택된 컨텐츠를 콜백을 통해 받아오려고 (onActivityResult)
+        // startActivityForResult : 다음 엑티비티(현재 우리 메인 엑티비티)에 넘겨주기 위해
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
