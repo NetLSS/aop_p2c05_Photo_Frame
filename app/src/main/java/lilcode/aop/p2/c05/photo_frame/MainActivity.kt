@@ -81,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         startPhotoFrameModeButton.setOnClickListener {
             val intent = Intent(this, PhotoFrameActivity::class.java)
 
+            // 인텐트에 데이터 담아서 실행시키기
             imageUriList.forEachIndexed { index, uri ->
                 intent.putExtra("photo${index}", uri.toString())
             }
