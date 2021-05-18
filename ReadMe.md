@@ -1,6 +1,6 @@
 # aop-part2-chapter05 - 전자액자
 
-
+저의 [블로그 포스팅](https://whyprogrammer.tistory.com/575)에서 더욱 자세한 내용을 참고해 보세요.
 
 # 목차
 
