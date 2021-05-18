@@ -77,6 +77,19 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun initStartPhotoFrameModeButton() {
+        startPhotoFrameModeButton.setOnClickListener {
+            val intent = Intent(this, PhotoFrameActivity::class.java)
+
+            imageUriList.forEachIndexed { index, uri ->
+                intent.putExtra("photo${index}", uri.toString())
+            }
+            intent.putExtra("photoListSize", imageUriList.size)
+
+            startActivity(intent) // 사진액자 엑티비티 실행
+        }
+    }
+
     private fun showPermissionContextPopup() {
         AlertDialog.Builder(this)
             .setTitle("권한이 필요합니다.")
@@ -152,7 +165,5 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    private fun initStartPhotoFrameModeButton() {
 
-    }
 }
